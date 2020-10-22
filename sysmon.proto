@@ -1,0 +1,19 @@
+syntax = "proto3";
+package sysmon;
+
+//import "google/protobuf/timestamp.proto";
+option go_package = "github.com/dbaratey/otus_go_hw/sysmon";
+
+service SysmonAgent {
+    rpc GetStats (NullReq) returns (stream SysMonInfo) {
+    }
+}
+
+message NullReq {
+}
+
+message SysMonInfo {
+    int32 avg_time = 1;
+    string key = 2;
+    double val = 3;
+}
