@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"github.com/dbaratey/otus_go_hw/sysmon"
+	"github.com/dbaratey/sysmon"
 	"google.golang.org/grpc"
 	"log"
 	"os"
@@ -19,13 +19,13 @@ func main() {
 	}
 	defer conn.Close()
 	client := sysmon.NewSysmonAgentClient(conn)
-	aCl,err:= client.GetStats(context.Background(),&sysmon.NullReq{})
+	aCl, err := client.GetStats(context.Background(), &sysmon.NullReq{})
 	if err != nil {
 		panic(err)
 	}
 
-	for{
-		m,err := aCl.Recv()
+	for {
+		m, err := aCl.Recv()
 		if err != nil {
 			log.Fatal(err)
 		}

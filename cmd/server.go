@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/dbaratey/otus_go_hw/sysmon"
+	"github.com/dbaratey/sysmon"
 	"github.com/ghodss/yaml"
 	"google.golang.org/grpc"
 	"io/ioutil"
@@ -18,7 +18,7 @@ var (
 	delay   = flag.Int("d", 3, "The delay")
 	c       = sysmon.NewCore(10)
 	confPth = flag.String("conf", "conf.yml", "Config file")
-	conf = configuration{}
+	conf    = configuration{}
 )
 
 type configuration struct {
@@ -28,20 +28,18 @@ type configuration struct {
 func main() {
 	flag.Parse()
 
-
 	// Config
 	buf, err := ioutil.ReadFile(*confPth)
 	if err != nil {
 		log.Fatal("Can't read conf file ", err.Error())
 	}
 
-
 	err = yaml.Unmarshal(buf, &conf)
 	if err != nil {
 		log.Fatal("Неверный конфигурационный файл")
 	}
 
-	for _,m := range conf.Metriks{
+	for _, m := range conf.Metriks {
 		switch m {
 		case "cpu":
 			w := sysmon.CpuWatcher{}
@@ -67,7 +65,7 @@ func (agentServer) GetStats(req *sysmon.NullReq, server sysmon.SysmonAgent_GetSt
 	t := time.Tick(time.Second * time.Duration(*delay))
 	for {
 		_ = <-t
-		for _,m := range conf.Metriks{
+		for _, m := range conf.Metriks {
 			switch m {
 			case "cpu":
 				err := server.Send(&sysmon.SysMonInfo{
