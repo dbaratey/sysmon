@@ -17,7 +17,7 @@ notifications:
 env:
   global:
     - GO111MODULE=on
-    - GOPROXY=https://proxy.golang.org
+    - GOPROXY=direct
     - BRANCH="${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}"
 
 before_install:
