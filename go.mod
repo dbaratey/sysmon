@@ -1,4 +1,4 @@
-module github.com/dbaratey/otus_go_hw/sysmon
+module github.com/dbaratey/sysmon
 
 go 1.14
 
