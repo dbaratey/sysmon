@@ -40,7 +40,7 @@ jobs:
     - stage: "Tests"
       name: "Unit tests"
       install: go mod download
-      script: go test -v -count=1 -race -gcflags=-l -timeout=30s ./...
+      script: go test -v -count=1 -race -gcflags=-l -timeout=30s $(go list ./... | grep -v /cmd/)
     - stage: "Tests"
       name: "Optimization tests"
       install: go mod download
