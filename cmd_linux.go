@@ -1,6 +1,6 @@
-package sysmon
-
 // +build linux
+
+package sysmon
 
 var (
 	CPU_COMMAND = []string{"top", "-bn1"}
